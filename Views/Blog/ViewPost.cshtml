@@ -1,0 +1,38 @@
+@{
+    Layout = "_Layout";
+}
+
+@model Post
+@{
+    string imagePath="" ;
+            if (Model is not null) 
+            {
+               imagePath = "~/Images/" + Model.ImageFileName;
+            }
+        }
+<a asp-controller="blog" asp-action="index" class="btn btn-secondary back"><i class="las la-arrow-left"></i> Back to home</a>
+<hr />
+
+<div class="post-view">
+    <div class="card mb-3" style="max-width: 940px;">
+        <div class="row g-0">
+            <div class="col-md-4 p-4">
+                <img src="@imagePath" asp-append-version="true" class="card-img-top" alt="logo" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body m-3">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <p class="card-text">@Model.Body
+                    <div>
+                        <small class="text-muted">@Model.CreatedTime</small>
+                        <div class="la-group">
+                            <a asp-controller="blog" asp-action="editpost" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="las la-edit"></i>Edit</a>
+                            <a asp-controller="blog" asp-action="deletepost" asp-route-id="@Model.Id"  onclick="return confirm('Are you sure delete this post?');"  class="btn btn-danger mx-2"><i class="las la-trash"></i>Delete</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

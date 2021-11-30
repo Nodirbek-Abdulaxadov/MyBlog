@@ -1,0 +1,33 @@
+@{
+    Layout = "_Layout";
+}
+@model BlogCreateViewModel
+<h3 class="text-center">Add new post</h3>
+<hr />
+
+<form asp-controller="blog" asp-action="addPost" enctype="multipart/form-data" method="post">
+    <div class="container mt-3 custom-input">
+        <label asp-for="Title" class="form-label">Post title</label>
+        <div class="input-group mb-3">
+            <input asp-for="Title" type="text" class="form-control">
+        </div>
+        <span asp-validation-for="Title" class="text-danger"></span><br>
+
+        <label asp-for="Body" class="form-label">Post body</label>
+        <div class="input-group mb-3">
+            <textarea asp-for="Body" class="form-control" rows="5"></textarea>
+        </div>
+        <span asp-validation-for="Body" class="text-danger"></span><br>
+
+        <label asp-for="ImageFile" class="form-label">Post photo</label>
+        <div class="input-group mb-3">
+            <input asp-for="ImageFile" accept="image/*" type="file" class="form-control">
+        </div>
+        <span asp-validation-for="ImageFile" class="text-danger"></span><br>
+    </div>
+
+    <div class="button-group">
+        <button class="btn btn-dark">Cancel</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

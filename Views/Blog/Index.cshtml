@@ -1,0 +1,38 @@
+@{
+    Layout = "_Layout";
+}
+@model List<Post>
+
+<h3 class="text-center">All blogs</h3>
+<hr />
+
+<div class="custom-cards">
+
+    @{
+        if (Model.Count == 0)
+        {
+            <h2>There is no post yet...</h2>
+        }
+    }
+
+    @foreach (var post in Model)
+    {
+        string imagePath = "~/Images/" + post.ImageFileName;
+        string body = @post.Body;
+        if (body.Length > 60)
+        {
+            body = body.Substring(0, 60);
+        }
+
+        <div class="card m-1 d-inline" style="width: 27%;">
+            <img src="@imagePath" class="card-img-top" style="height: 15rem;" asp-append-version="true" alt="logo" />
+            <div class="card-body custom-card">
+                <h5 class="card-title">@post.Title</h5>
+                <p class="card-text"><small class="text-muted">@post.CreatedTime</small></p>
+                <p class="card-text">@body ...</p>
+                <a asp-controller="blog" asp-action="viewpost" asp-route-id="@post.Id" class="btn btn-primary"><i class="las la-angle-double-right">
+                    </i>Read More</a>
+            </div>
+        </div>
+    }
+</div>

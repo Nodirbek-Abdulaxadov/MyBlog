@@ -1,0 +1,47 @@
+@{
+    Layout = "_Layout";
+}
+@model BlogEditViewModel
+<h3 class="text-center">Add new post</h3>
+        <hr />
+        @{string imagePath="" ;
+            if (Model is not null) 
+            {
+               imagePath = "~/Images/" + Model.ImageFileName;
+            }
+        }
+        <form asp-controller="blog" asp-action="editpost" enctype="multipart/form-data" method="post">
+            <div class="container mt-3 custom-input">
+                <label asp-for="Title" class="form-label">Post title</label>
+                <div class="input-group mb-3">
+                    <input asp-for="Title" type="text" class="form-control" value="@Model.Title">
+                </div>
+                <span asp-validation-for="Title" class="text-danger"></span><br>
+
+                <label asp-for="Body" class="form-label">Post body</label>
+                <div class="input-group mb-3">
+                    <textarea asp-for="Body" class="form-control" rows="5">
+                        @Model.Body
+                    </textarea>
+                </div>
+                <span asp-validation-for="Body" class="text-danger"></span><br>
+
+                <input hidden asp-for="Id" />
+                <input hidden asp-for="ImageFileName" />
+                
+                <label asp-for="ImageFileName" class="form-label">Post photo</label>
+                <div class="input-group mb-3">
+                    <img src="@imagePath" asp-append-version="true" style="width: 200px; heigth: 200px" alt="">
+                </div>
+
+                <label asp-for="ImageFile" class="form-label">Post photo</label>
+                <div class="input-group mb-3">
+                    <input asp-for="ImageFile" accept="image/*" type="file" class="form-control">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <a class="btn btn-dark">Cancel</a>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
